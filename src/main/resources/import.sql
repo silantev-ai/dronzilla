@@ -3,11 +3,11 @@ INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, 
 INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0003', 'LIGHTWEIGHT', 50, 100, 'IDLE');
 INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0004', 'MIDDLEWEIGHT', 100, 100, 'IDLE');
 INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0005', 'CRUISERWEIGHT', 200, 100, 'IDLE');
-INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0006', 'HEAVYWEIGHT', 500, 100, 'IDLE');
-INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0007', 'LIGHTWEIGHT', 50, 100, 'IDLE');
-INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0008', 'MIDDLEWEIGHT', 100, 100, 'IDLE');
-INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0009', 'CRUISERWEIGHT', 200, 100, 'IDLE');
-INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0010', 'HEAVYWEIGHT', 500, 100, 'IDLE');
+INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0006', 'HEAVYWEIGHT', 500, 50, 'IDLE');
+INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0007', 'LIGHTWEIGHT', 50, 25, 'IDLE');
+INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0008', 'MIDDLEWEIGHT', 100, 24, 'IDLE');
+INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0009', 'CRUISERWEIGHT', 200, 10, 'IDLE');
+INSERT INTO drones (serial_number, drone_model, weight_limit, battery_capacity, drone_state) VALUES ('N0010', 'HEAVYWEIGHT', 500, 0, 'IDLE');
 
 INSERT INTO medication (name, weight, code) VALUES ('medication-01', 10, 'AA_01');
 INSERT INTO medication (name, weight, code) VALUES ('medication-02', 20, 'AA_02');
