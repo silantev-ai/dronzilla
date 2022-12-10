@@ -1,13 +1,12 @@
 package alex.silantev.dronzilla.services.Impl;
 
 import alex.silantev.dronzilla.constraints.BizConstraintProcessor;
-import alex.silantev.dronzilla.constraints.DroneRegisterBizConstraint;
+import alex.silantev.dronzilla.constraints.RegistrationDroneBizConstraint;
 import alex.silantev.dronzilla.constraints.LoadDroneBizConstraint;
 import alex.silantev.dronzilla.dtos.DroneCreateRequest;
 import alex.silantev.dronzilla.dtos.DroneWithCargoDto;
 import alex.silantev.dronzilla.dtos.DroneLoadRequest;
 import alex.silantev.dronzilla.dtos.DroneSummaryDto;
-import alex.silantev.dronzilla.dtos.MedicationDto;
 import alex.silantev.dronzilla.dtos.OrderItemDto;
 import alex.silantev.dronzilla.enums.DroneState;
 import alex.silantev.dronzilla.mappers.DroneMapper;
@@ -15,7 +14,6 @@ import alex.silantev.dronzilla.mappers.Mappers;
 import alex.silantev.dronzilla.mappers.MedicationMapper;
 import alex.silantev.dronzilla.models.Drone;
 import alex.silantev.dronzilla.models.Order;
-import alex.silantev.dronzilla.models.OrderItem;
 import alex.silantev.dronzilla.repository.DroneRepository;
 import alex.silantev.dronzilla.repository.MedicationRepository;
 import alex.silantev.dronzilla.repository.OrderRepository;
@@ -44,7 +42,7 @@ public class DroneServiceImpl implements DroneService {
     @Transactional
     public DroneSummaryDto register(DroneCreateRequest droneCreateRequest) {
         BizConstraintProcessor.of(
-                DroneRegisterBizConstraint.builder()
+                RegistrationDroneBizConstraint.builder()
                         .droneRepository(droneRepository)
                         .droneCreateRequest(droneCreateRequest)
                         .build())

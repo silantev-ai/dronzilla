@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Builder
 @RequiredArgsConstructor
-public class DroneRegisterBizConstraint implements BizConstraint {
+public class RegistrationDroneBizConstraint implements BizConstraint {
 
     private final DroneRepository droneRepository;
     private final DroneCreateRequest droneCreateRequest;
