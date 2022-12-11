@@ -1,3 +1,21 @@
+## Commands
+
+### build application
+
+./gradlew bootJar
+
+### run tests
+
+./gradlew test
+
+### run application
+
+./gradlew bootRun
+
+### Swagger UI
+
+http://localhost:9090/swagger-ui/index.html
+
 ## Drones
 
 [[_TOC_]]

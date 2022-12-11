@@ -1,5 +1,7 @@
 package alex.silantev.dronzilla.services.Impl;
 
+import alex.silantev.dronzilla.constraints.BizConstraintProcessor;
+import alex.silantev.dronzilla.constraints.DroneFinishDeliveryBizConstraint;
 import alex.silantev.dronzilla.dtos.DroneLoadRequest;
 import alex.silantev.dronzilla.enums.DroneState;
 import alex.silantev.dronzilla.enums.OrderStatus;
@@ -43,6 +45,24 @@ public class OrderServiceImpl implements OrderService {
             orderItemRepository.save(orderItem);
         }
         drone.setDroneState(DroneState.LOADED);
+        droneRepository.save(drone);
+    }
+
+    @Override
+    @Transactional
+    public void finish(int droneId) {
+        DroneFinishDeliveryBizConstraint constraint = DroneFinishDeliveryBizConstraint.builder()
+                .id(droneId)
+                .orderRepository(orderRepository)
+                .build();
+        BizConstraintProcessor.of(constraint).check();
+
+        Order order = constraint.getOrder();
+        order.setStatus(OrderStatus.ARCHIVED);
+        orderRepository.save(order);
+
+        Drone drone = order.getDrone();
+        drone.setDroneState(DroneState.DELIVERED);
         droneRepository.save(drone);
     }
 }

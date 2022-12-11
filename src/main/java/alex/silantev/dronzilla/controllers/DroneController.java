@@ -2,6 +2,7 @@ package alex.silantev.dronzilla.controllers;
 
 import alex.silantev.dronzilla.controllers.docs.DroneControllerDocs;
 import alex.silantev.dronzilla.dtos.DroneCreateRequest;
+import alex.silantev.dronzilla.dtos.DroneUpdateRequest;
 import alex.silantev.dronzilla.dtos.DroneWithCargoDto;
 import alex.silantev.dronzilla.dtos.DroneLoadRequest;
 import alex.silantev.dronzilla.dtos.DroneSummaryDto;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +30,12 @@ public class DroneController implements DroneControllerDocs {
     @PostMapping
     public DroneSummaryDto register(@RequestBody @Valid DroneCreateRequest droneCreateRequest) {
         return droneService.register(droneCreateRequest);
+    }
+
+    @Override
+    @PutMapping("/{id}")
+    public DroneSummaryDto update(@PathVariable("id") int id, @RequestBody @Valid DroneUpdateRequest droneUpdateRequest) {
+        return droneService.update(id, droneUpdateRequest);
     }
 
     @Override

@@ -39,6 +39,7 @@ public class LoadDroneBizConstraint implements BizConstraint {
         drone = droneRepository.getEntityOrThrow(id);
         checkDroneState();
         checkDroneBatteryCapacity();
+        checkMedicationAmounts();
 
         Map<Integer, Integer> medicationAmountMap = droneLoadRequest.getMedicationAmounts()
                 .stream()
@@ -59,6 +60,17 @@ public class LoadDroneBizConstraint implements BizConstraint {
     private void checkDroneBatteryCapacity() {
         if (drone.getBatteryCapacity() < MIN_BATTERY_CAPACITY_TO_GO) {
             throw new BizServiceException(ErrorCode.DRONE_LOW_BATTERY);
+        }
+    }
+
+    private void checkMedicationAmounts() {
+        int uniqueMedications = droneLoadRequest.getMedicationAmounts().stream()
+                .map(DroneLoadRequest.MedicationAmount::getId)
+                .collect(Collectors.toSet())
+                .size();
+
+        if (uniqueMedications != droneLoadRequest.getMedicationAmounts().size()) {
+            throw new BizServiceException(ErrorCode.VALIDATION_ERROR);
         }
     }
 

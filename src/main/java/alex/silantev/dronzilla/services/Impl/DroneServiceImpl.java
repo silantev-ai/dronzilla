@@ -1,9 +1,11 @@
 package alex.silantev.dronzilla.services.Impl;
 
 import alex.silantev.dronzilla.constraints.BizConstraintProcessor;
+import alex.silantev.dronzilla.constraints.DroneUpdateBizConstraint;
 import alex.silantev.dronzilla.constraints.RegistrationDroneBizConstraint;
 import alex.silantev.dronzilla.constraints.LoadDroneBizConstraint;
 import alex.silantev.dronzilla.dtos.DroneCreateRequest;
+import alex.silantev.dronzilla.dtos.DroneUpdateRequest;
 import alex.silantev.dronzilla.dtos.DroneWithCargoDto;
 import alex.silantev.dronzilla.dtos.DroneLoadRequest;
 import alex.silantev.dronzilla.dtos.DroneSummaryDto;
@@ -25,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,6 +57,22 @@ public class DroneServiceImpl implements DroneService {
                 .batteryCapacity(droneCreateRequest.getBatteryCapacity())
                 .droneState(DroneState.IDLE)
                 .build());
+        return droneMapper.mapDrone(drone);
+    }
+
+    @Override
+    @Transactional
+    public DroneSummaryDto update(int id, DroneUpdateRequest droneUpdateRequest) {
+        DroneUpdateBizConstraint constraint = DroneUpdateBizConstraint.builder()
+                .id(id)
+                .droneUpdateRequest(droneUpdateRequest)
+                .droneRepository(droneRepository)
+                .build();
+        BizConstraintProcessor.of(constraint).check();
+        Drone drone = constraint.getDrone();
+        Optional.ofNullable(droneUpdateRequest.getBatteryCapacity()).ifPresent(drone::setBatteryCapacity);
+        Optional.ofNullable(droneUpdateRequest.getDroneState()).ifPresent(drone::setDroneState);
+        droneRepository.save(drone);
         return droneMapper.mapDrone(drone);
     }
 

@@ -8,5 +8,6 @@ public enum ErrorCode {
     DRONE_IS_BUSY,
     DRONE_MUST_BE_LOADED,
     DRONE_LOW_BATTERY,
+    DRONE_INVALID_STATE,
     OVERWEIGHT_CARGO
 }

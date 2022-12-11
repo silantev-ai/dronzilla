@@ -1,6 +1,7 @@
 package alex.silantev.dronzilla.services;
 
 import alex.silantev.dronzilla.dtos.DroneCreateRequest;
+import alex.silantev.dronzilla.dtos.DroneUpdateRequest;
 import alex.silantev.dronzilla.dtos.DroneWithCargoDto;
 import alex.silantev.dronzilla.dtos.DroneLoadRequest;
 import alex.silantev.dronzilla.dtos.DroneSummaryDto;
@@ -10,6 +11,8 @@ import java.util.List;
 public interface DroneService {
 
     DroneSummaryDto register(DroneCreateRequest droneCreateRequest);
+
+    DroneSummaryDto update(int id, DroneUpdateRequest droneUpdateRequest);
 
     DroneSummaryDto loadDrone(int id, DroneLoadRequest droneLoadRequest);
 
