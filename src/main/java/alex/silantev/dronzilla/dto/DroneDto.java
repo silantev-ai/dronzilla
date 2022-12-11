@@ -1,4 +1,4 @@
-package alex.silantev.dronzilla.dtos;
+package alex.silantev.dronzilla.dto;
 
 import alex.silantev.dronzilla.enums.DroneModel;
 import alex.silantev.dronzilla.enums.DroneState;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Schema(description = "Drone summary info")
-public class DroneSummaryDto {
+public class DroneDto {
 
     @Schema(description = "Id")
     private Integer id;

@@ -1,6 +1,6 @@
 package alex.silantev.dronzilla.constraints;
 
-import alex.silantev.dronzilla.dtos.DroneCreateRequest;
+import alex.silantev.dronzilla.dto.DroneCreateRequest;
 import alex.silantev.dronzilla.exceptions.BizServiceException;
 import alex.silantev.dronzilla.enums.ErrorCode;
 import alex.silantev.dronzilla.repository.DroneRepository;

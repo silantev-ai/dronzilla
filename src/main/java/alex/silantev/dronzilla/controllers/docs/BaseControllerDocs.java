@@ -1,6 +1,6 @@
 package alex.silantev.dronzilla.controllers.docs;
 
-import alex.silantev.dronzilla.dtos.ErrorResponse;
+import alex.silantev.dronzilla.dto.ErrorResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

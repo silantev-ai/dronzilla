@@ -1,4 +1,4 @@
-package alex.silantev.dronzilla.dtos;
+package alex.silantev.dronzilla.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

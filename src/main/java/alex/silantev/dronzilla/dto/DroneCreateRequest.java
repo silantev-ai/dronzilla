@@ -1,7 +1,6 @@
-package alex.silantev.dronzilla.dtos;
+package alex.silantev.dronzilla.dto;
 
 import alex.silantev.dronzilla.enums.DroneModel;
-import alex.silantev.dronzilla.enums.DroneState;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;

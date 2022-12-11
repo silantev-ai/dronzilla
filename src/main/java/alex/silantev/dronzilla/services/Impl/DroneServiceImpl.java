@@ -4,12 +4,11 @@ import alex.silantev.dronzilla.constraints.BizConstraintProcessor;
 import alex.silantev.dronzilla.constraints.DroneUpdateBizConstraint;
 import alex.silantev.dronzilla.constraints.RegistrationDroneBizConstraint;
 import alex.silantev.dronzilla.constraints.LoadDroneBizConstraint;
-import alex.silantev.dronzilla.dtos.DroneCreateRequest;
-import alex.silantev.dronzilla.dtos.DroneUpdateRequest;
-import alex.silantev.dronzilla.dtos.DroneWithCargoDto;
-import alex.silantev.dronzilla.dtos.DroneLoadRequest;
-import alex.silantev.dronzilla.dtos.DroneSummaryDto;
-import alex.silantev.dronzilla.dtos.OrderItemDto;
+import alex.silantev.dronzilla.dto.DroneCreateRequest;
+import alex.silantev.dronzilla.dto.DroneDto;
+import alex.silantev.dronzilla.dto.DroneUpdateRequest;
+import alex.silantev.dronzilla.dto.DroneLoadRequest;
+import alex.silantev.dronzilla.dto.OrderItemDto;
 import alex.silantev.dronzilla.enums.DroneState;
 import alex.silantev.dronzilla.mappers.DroneMapper;
 import alex.silantev.dronzilla.mappers.Mappers;
@@ -25,7 +24,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,15 +33,13 @@ import java.util.stream.Collectors;
 public class DroneServiceImpl implements DroneService {
 
     private final DroneRepository droneRepository;
-    private final OrderRepository orderRepository;
     private final MedicationRepository medicationRepository;
     private final OrderService orderService;
     private final DroneMapper droneMapper = Mappers.droneMapper;
-    private final MedicationMapper medicationMapper = Mappers.medicationMapper;
 
     @Override
     @Transactional
-    public DroneSummaryDto register(DroneCreateRequest droneCreateRequest) {
+    public DroneDto register(DroneCreateRequest droneCreateRequest) {
         BizConstraintProcessor.of(
                 RegistrationDroneBizConstraint.builder()
                         .droneRepository(droneRepository)
@@ -62,7 +58,7 @@ public class DroneServiceImpl implements DroneService {
 
     @Override
     @Transactional
-    public DroneSummaryDto update(int id, DroneUpdateRequest droneUpdateRequest) {
+    public DroneDto update(int id, DroneUpdateRequest droneUpdateRequest) {
         DroneUpdateBizConstraint constraint = DroneUpdateBizConstraint.builder()
                 .id(id)
                 .droneUpdateRequest(droneUpdateRequest)
@@ -78,7 +74,7 @@ public class DroneServiceImpl implements DroneService {
 
     @Override
     @Transactional
-    public DroneSummaryDto loadDrone(int id, DroneLoadRequest droneLoadRequest) {
+    public DroneDto loadDrone(int id, DroneLoadRequest droneLoadRequest) {
         LoadDroneBizConstraint constraint = LoadDroneBizConstraint.builder()
                 .droneRepository(droneRepository)
                 .medicationRepository(medicationRepository)
@@ -95,21 +91,13 @@ public class DroneServiceImpl implements DroneService {
 
     @Override
     @Transactional(readOnly = true)
-    public DroneWithCargoDto getById(int id) {
+    public DroneDto getById(int id) {
         Drone drone = droneRepository.getEntityOrThrow(id);
-        List<OrderItemDto> cargo = orderRepository.findActiveOrder(drone.getId())
-                .map(Order::getOrderItems)
-                .stream()
-                .flatMap(Collection::stream)
-                .map(orderItem ->
-                    new OrderItemDto(orderItem.getAmount(), medicationMapper.mapMedication(orderItem.getMedication()))
-                )
-                .collect(Collectors.toList());
-        return droneMapper.mapDrone(drone, cargo);
+        return droneMapper.mapDrone(drone);
     }
 
     @Override
-    public List<DroneSummaryDto> findAll() {
+    public List<DroneDto> findAll() {
         return droneRepository.findAll()
                 .stream()
                 .map(droneMapper::mapDrone)

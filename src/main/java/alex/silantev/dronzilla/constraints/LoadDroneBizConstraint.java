@@ -1,6 +1,6 @@
 package alex.silantev.dronzilla.constraints;
 
-import alex.silantev.dronzilla.dtos.DroneLoadRequest;
+import alex.silantev.dronzilla.dto.DroneLoadRequest;
 import alex.silantev.dronzilla.enums.DroneState;
 import alex.silantev.dronzilla.enums.ErrorCode;
 import alex.silantev.dronzilla.exceptions.BizServiceException;

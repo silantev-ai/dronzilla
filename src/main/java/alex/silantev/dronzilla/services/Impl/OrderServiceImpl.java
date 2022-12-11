@@ -2,11 +2,17 @@ package alex.silantev.dronzilla.services.Impl;
 
 import alex.silantev.dronzilla.constraints.BizConstraintProcessor;
 import alex.silantev.dronzilla.constraints.DroneFinishDeliveryBizConstraint;
-import alex.silantev.dronzilla.dtos.DroneLoadRequest;
+import alex.silantev.dronzilla.dto.DroneDeliveryInfoDto;
+import alex.silantev.dronzilla.dto.DroneLoadRequest;
+import alex.silantev.dronzilla.dto.OrderItemDto;
 import alex.silantev.dronzilla.enums.DroneState;
+import alex.silantev.dronzilla.enums.ErrorCode;
 import alex.silantev.dronzilla.enums.OrderStatus;
+import alex.silantev.dronzilla.exceptions.BizServiceException;
+import alex.silantev.dronzilla.mappers.DroneMapper;
+import alex.silantev.dronzilla.mappers.Mappers;
+import alex.silantev.dronzilla.mappers.MedicationMapper;
 import alex.silantev.dronzilla.models.Drone;
-import alex.silantev.dronzilla.models.Medication;
 import alex.silantev.dronzilla.models.Order;
 import alex.silantev.dronzilla.models.OrderItem;
 import alex.silantev.dronzilla.repository.DroneRepository;
@@ -19,6 +25,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
@@ -27,6 +37,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderItemRepository orderItemRepository;
     private final DroneRepository droneRepository;
     private final MedicationRepository medicationRepository;
+    private final DroneMapper droneMapper = Mappers.droneMapper;
+    private final MedicationMapper medicationMapper = Mappers.medicationMapper;
 
     @Async
     @Override
@@ -49,8 +61,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public DroneDeliveryInfoDto getDroneDeliveryInfo(int droneId) {
+        Order order = orderRepository.findActiveOrder(droneId)
+                .orElseThrow(() -> new BizServiceException(ErrorCode.VALIDATION_ERROR));
+        List<OrderItemDto> cargo = order.getOrderItems()
+                .stream()
+                .map(orderItem ->
+                        new OrderItemDto(orderItem.getAmount(), medicationMapper.mapMedication(orderItem.getMedication()))
+                )
+                .collect(Collectors.toList());
+        return droneMapper.mapDrone(order.getDrone(), cargo);
+    }
+
+    @Override
     @Transactional
-    public void finish(int droneId) {
+    public void finishDelivery(int droneId) {
         DroneFinishDeliveryBizConstraint constraint = DroneFinishDeliveryBizConstraint.builder()
                 .id(droneId)
                 .orderRepository(orderRepository)

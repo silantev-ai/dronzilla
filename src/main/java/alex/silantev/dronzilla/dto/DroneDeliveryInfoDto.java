@@ -1,4 +1,4 @@
-package alex.silantev.dronzilla.dtos;
+package alex.silantev.dronzilla.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -12,8 +12,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Drone with cargo info")
-public class DroneWithCargoDto extends DroneSummaryDto {
+@Schema(description = "Drone info with cargo")
+public class DroneDeliveryInfoDto extends DroneDto {
 
     @Schema(description = "Cargo")
     private List<OrderItemDto> cargo;

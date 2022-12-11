@@ -1,10 +1,9 @@
 package alex.silantev.dronzilla.controllers.docs;
 
-import alex.silantev.dronzilla.dtos.DroneCreateRequest;
-import alex.silantev.dronzilla.dtos.DroneUpdateRequest;
-import alex.silantev.dronzilla.dtos.DroneWithCargoDto;
-import alex.silantev.dronzilla.dtos.DroneLoadRequest;
-import alex.silantev.dronzilla.dtos.DroneSummaryDto;
+import alex.silantev.dronzilla.dto.DroneCreateRequest;
+import alex.silantev.dronzilla.dto.DroneDto;
+import alex.silantev.dronzilla.dto.DroneUpdateRequest;
+import alex.silantev.dronzilla.dto.DroneLoadRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,24 +17,24 @@ public interface DroneControllerDocs extends BaseControllerDocs {
 
     @Operation(summary = "Drone registration",
             responses = @ApiResponse(responseCode = "200", content =
-                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneSummaryDto.class))}))
-    DroneSummaryDto register(DroneCreateRequest droneCreateRequest);
+                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneDto.class))}))
+    DroneDto register(DroneCreateRequest droneCreateRequest);
 
     @Operation(summary = "Drone update",
             responses = @ApiResponse(responseCode = "200", content =
-                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneSummaryDto.class))}))
-    DroneSummaryDto update(int id, DroneUpdateRequest droneUpdateRequest);
+                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneDto.class))}))
+    DroneDto update(int id, DroneUpdateRequest droneUpdateRequest);
 
     @Operation(summary = "Load drone with medications",
             responses = @ApiResponse(responseCode = "200", content =
-                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneSummaryDto.class))}))
-    DroneSummaryDto loadDrone(int id, DroneLoadRequest droneLoadRequest);
+                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneDto.class))}))
+    DroneDto loadDrone(int id, DroneLoadRequest droneLoadRequest);
 
-    @Operation(summary = "Drone detailed information",
+    @Operation(summary = "Drone information",
             responses = @ApiResponse(responseCode = "200", content =
-                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneWithCargoDto.class))}))
-    DroneWithCargoDto getById(int id);
+                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneDto.class))}))
+    DroneDto getById(int id);
 
     @Operation(summary = "drones")
-    List<DroneSummaryDto> findAll();
+    List<DroneDto> findAll();
 }

@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     @Query("SELECT o FROM Order o " +
+            "JOIN FETCH o.drone " +
             "JOIN FETCH o.orderItems " +
             "WHERE o.drone.id = :droneId AND o.status = :status")
     List<Order> findAllByDroneIdAndStatus(int droneId, OrderStatus status);

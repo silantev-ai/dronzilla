@@ -1,22 +1,21 @@
 package alex.silantev.dronzilla.services;
 
-import alex.silantev.dronzilla.dtos.DroneCreateRequest;
-import alex.silantev.dronzilla.dtos.DroneUpdateRequest;
-import alex.silantev.dronzilla.dtos.DroneWithCargoDto;
-import alex.silantev.dronzilla.dtos.DroneLoadRequest;
-import alex.silantev.dronzilla.dtos.DroneSummaryDto;
+import alex.silantev.dronzilla.dto.DroneCreateRequest;
+import alex.silantev.dronzilla.dto.DroneDto;
+import alex.silantev.dronzilla.dto.DroneUpdateRequest;
+import alex.silantev.dronzilla.dto.DroneLoadRequest;
 
 import java.util.List;
 
 public interface DroneService {
 
-    DroneSummaryDto register(DroneCreateRequest droneCreateRequest);
+    DroneDto register(DroneCreateRequest droneCreateRequest);
 
-    DroneSummaryDto update(int id, DroneUpdateRequest droneUpdateRequest);
+    DroneDto update(int id, DroneUpdateRequest droneUpdateRequest);
 
-    DroneSummaryDto loadDrone(int id, DroneLoadRequest droneLoadRequest);
+    DroneDto loadDrone(int id, DroneLoadRequest droneLoadRequest);
 
-    DroneWithCargoDto getById(int id);
+    DroneDto getById(int id);
 
-    List<DroneSummaryDto> findAll();
+    List<DroneDto> findAll();
 }
