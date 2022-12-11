@@ -5,6 +5,7 @@ import alex.silantev.dronzilla.dto.DroneCreateRequest;
 import alex.silantev.dronzilla.dto.DroneDto;
 import alex.silantev.dronzilla.dto.DroneUpdateRequest;
 import alex.silantev.dronzilla.dto.DroneLoadRequest;
+import alex.silantev.dronzilla.enums.DroneState;
 import alex.silantev.dronzilla.services.DroneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -51,7 +53,7 @@ public class DroneController implements DroneControllerDocs {
 
     @Override
     @GetMapping
-    public List<DroneDto> findAll() {
-        return droneService.findAll();
+    public List<DroneDto> findAll(@RequestParam(required = false) DroneState droneState) {
+        return droneService.findAll(droneState);
     }
 }

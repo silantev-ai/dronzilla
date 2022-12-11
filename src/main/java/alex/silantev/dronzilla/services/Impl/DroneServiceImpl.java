@@ -8,16 +8,12 @@ import alex.silantev.dronzilla.dto.DroneCreateRequest;
 import alex.silantev.dronzilla.dto.DroneDto;
 import alex.silantev.dronzilla.dto.DroneUpdateRequest;
 import alex.silantev.dronzilla.dto.DroneLoadRequest;
-import alex.silantev.dronzilla.dto.OrderItemDto;
 import alex.silantev.dronzilla.enums.DroneState;
 import alex.silantev.dronzilla.mappers.DroneMapper;
 import alex.silantev.dronzilla.mappers.Mappers;
-import alex.silantev.dronzilla.mappers.MedicationMapper;
 import alex.silantev.dronzilla.models.Drone;
-import alex.silantev.dronzilla.models.Order;
 import alex.silantev.dronzilla.repository.DroneRepository;
 import alex.silantev.dronzilla.repository.MedicationRepository;
-import alex.silantev.dronzilla.repository.OrderRepository;
 import alex.silantev.dronzilla.services.DroneService;
 import alex.silantev.dronzilla.services.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -97,8 +93,8 @@ public class DroneServiceImpl implements DroneService {
     }
 
     @Override
-    public List<DroneDto> findAll() {
-        return droneRepository.findAll()
+    public List<DroneDto> findAll(DroneState droneState) {
+        return droneRepository.findAllByDroneState(droneState)
                 .stream()
                 .map(droneMapper::mapDrone)
                 .collect(Collectors.toList());

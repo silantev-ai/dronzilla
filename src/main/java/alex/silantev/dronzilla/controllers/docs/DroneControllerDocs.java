@@ -4,7 +4,9 @@ import alex.silantev.dronzilla.dto.DroneCreateRequest;
 import alex.silantev.dronzilla.dto.DroneDto;
 import alex.silantev.dronzilla.dto.DroneUpdateRequest;
 import alex.silantev.dronzilla.dto.DroneLoadRequest;
+import alex.silantev.dronzilla.enums.DroneState;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -36,5 +38,5 @@ public interface DroneControllerDocs extends BaseControllerDocs {
     DroneDto getById(int id);
 
     @Operation(summary = "drones")
-    List<DroneDto> findAll();
+    List<DroneDto> findAll(DroneState droneState);
 }
