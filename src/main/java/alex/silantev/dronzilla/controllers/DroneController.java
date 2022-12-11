@@ -8,6 +8,7 @@ import alex.silantev.dronzilla.dto.DroneLoadRequest;
 import alex.silantev.dronzilla.enums.DroneState;
 import alex.silantev.dronzilla.services.DroneService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/v1/drones", produces = "application/json")
+@RequestMapping(value = "/api/v1/drones", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DroneController implements DroneControllerDocs {
 
     private final DroneService droneService;

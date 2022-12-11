@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.MediaType;
 
 import java.util.List;
 
@@ -19,22 +20,22 @@ public interface DroneControllerDocs extends BaseControllerDocs {
 
     @Operation(summary = "Drone registration",
             responses = @ApiResponse(responseCode = "200", content =
-                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneDto.class))}))
+                    {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = DroneDto.class))}))
     DroneDto register(DroneCreateRequest droneCreateRequest);
 
     @Operation(summary = "Drone update",
             responses = @ApiResponse(responseCode = "200", content =
-                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneDto.class))}))
+                    {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = DroneDto.class))}))
     DroneDto update(int id, DroneUpdateRequest droneUpdateRequest);
 
     @Operation(summary = "Load drone with medications",
             responses = @ApiResponse(responseCode = "200", content =
-                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneDto.class))}))
+                    {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = DroneDto.class))}))
     DroneDto loadDrone(int id, DroneLoadRequest droneLoadRequest);
 
     @Operation(summary = "Drone information",
             responses = @ApiResponse(responseCode = "200", content =
-                    {@Content(mediaType = "application/json", schema = @Schema(implementation = DroneDto.class))}))
+                    {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = DroneDto.class))}))
     DroneDto getById(int id);
 
     @Operation(summary = "drones")

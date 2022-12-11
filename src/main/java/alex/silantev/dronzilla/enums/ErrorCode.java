@@ -1,7 +1,8 @@
 package alex.silantev.dronzilla.enums;
 
 public enum ErrorCode {
-
+    IO_ERROR,
+    RESOURCE_NOT_FOUND,
     VALIDATION_ERROR,
     DRONE_SERIAL_NUMBER_NOT_UNIQUE,
     DRONE_NOT_FOUND,
