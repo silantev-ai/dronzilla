@@ -16,6 +16,21 @@
 
 http://localhost:9090/swagger-ui/index.html
 
+#### Endpoints overview
+- To register a new drone: **POST /api/v1/drones**
+- To get all drones or filter them by state(for example IDLE - ready to go): **GET /api/v1/drones**
+- To load a drone with medications: **POST /api/v1/drones/{id}/load**
+  - drone must be in IDLE state
+  - drone battery level must be >25%
+  - you are free to choose any amount of the medications if it is: total weight of a cargo < drone.weightLimit
+- To change drones' state or a battery level: **PUT /api/v1/drones/{id}**
+- To create a new medication: **POST /api/v1/medications**
+- To get info about all medications: **GET /api/v1/medications**
+  - to preview medication images: **GET /api/v1/files**
+- To check a drone after loading: **POST /api/v1/orders/drone/{id}/delivery-info**
+- To finish delivery: **POST /api/v1/orders/drone/{id}/finish-delivery**
+- To get drones' battery audit: **POST /api/v1/drones/{id}/battery-audit**
+
 ## Drones
 
 [[_TOC_]]
